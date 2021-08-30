@@ -1,7 +1,7 @@
-export default {
+export const refs =  {
     menuEl: document.querySelector(".js-menu"),
     inputEl: document.querySelector("#theme-switch-toggle")
   
 }
-console.log(menuEl);
-console.log(inputEl);
+// console.log(menuEl);
+// console.log(inputEl);
