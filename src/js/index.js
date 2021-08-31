@@ -2,6 +2,7 @@ import '../sass/main.scss';
 import menu from "../menu.json";
 console.log(menu);
 import markup from "../templates/markup.hbs";
+import { saveToLocalStorage, getFromLocalStorage } from "./helpers.js";
 
 import { refs } from "../js/refs.js";
 const { menuEl, inputEl, body } = refs;
@@ -21,19 +22,25 @@ const {LIGHT, DARK} = Theme
   menuEl.insertAdjacentHTML("afterbegin", menuMarkup)
 inputEl.addEventListener("change", changeTheme);
 
+if (!localStorage.getItem("class")) {
+  body.classList.add(LIGHT);
+  saveToLocalStorage("class", LIGHT);
+}
+
 function changeTheme() {
   if (inputEl.checked) {
     body.classList.add(DARK)
     body.classList.remove(LIGHT);
-    localStorage.setItem("class", DARK);
+    saveToLocalStorage("class", DARK);
+
   } else {
      body.classList.add(LIGHT)
     body.classList.remove(DARK);
-     localStorage.setItem("class", LIGHT);
+     saveToLocalStorage("class", LIGHT);
   }
 }
 
-  const currentTheme = localStorage.getItem("class");
+  const  currentTheme = getFromLocalStorage("class")
   console.log(currentTheme);
   if (currentTheme === DARK) {
     body.classList.add(DARK)
